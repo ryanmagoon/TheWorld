@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheWorld.Models;
 using TheWorld.Services;
 using TheWorld.ViewModels;
 
@@ -14,16 +15,19 @@ namespace TheWorld.Controllers.Web
     {
         private IMailService _mailService;
         private IConfigurationRoot _config;
+        private WorldContext _context;
 
-        public AppController(IMailService mailService, IConfigurationRoot config)
+        public AppController(IMailService mailService, IConfigurationRoot config, WorldContext context)
         {
             _mailService = mailService;
             _config = config;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var data = _context.Trips.ToList();
+            return View(data);
         }
 
         public IActionResult Contact()
