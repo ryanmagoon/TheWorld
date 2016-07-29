@@ -4,5 +4,8 @@
   },
   "MailSettings": {
     "ToAddress": "mr.magoon5@gmail.com"
+  },
+  "Keys": {
+    "BingKey": ""
   }
 }
