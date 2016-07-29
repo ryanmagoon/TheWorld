@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,17 @@ namespace TheWorld.Controllers.Api
         [HttpGet("")]
         public IActionResult Get()
         {
-            return Ok(_repository.GetAllTrips());
+            try
+            {
+                var results = _repository.GetAllTrips();
+                return Ok(Mapper.Map<IEnumerable<TripViewModel>>(results));
+            }
+            catch (Exception ex)
+            {
+                // TODO logging
+
+                return BadRequest("Error occurred");
+            }
         }
 
         [HttpPost("")]
@@ -30,7 +41,10 @@ namespace TheWorld.Controllers.Api
         {
             if (ModelState.IsValid)
             {
-                return Created($"api/trips/{theTrip.Name}", theTrip);
+                // Save to the database
+                var newTrip = Mapper.Map<Trip>(theTrip);
+
+                return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
             }
 
             return BadRequest(ModelState);
