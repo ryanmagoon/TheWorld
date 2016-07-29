@@ -2,6 +2,7 @@
   "dependencies": {
     "AutoMapper": "5.0.2",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
