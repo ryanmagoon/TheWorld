@@ -51,6 +51,8 @@ namespace TheWorld
 
             services.AddTransient<WorldContextSeedData>();
 
+            services.AddLogging();
+
             services.AddMvc();
         }
 
@@ -58,11 +60,17 @@ namespace TheWorld
         public void Configure(IApplicationBuilder app, 
             IHostingEnvironment env, 
             ILoggerFactory loggerFactory,
-            WorldContextSeedData seeder)
+            WorldContextSeedData seeder,
+            ILoggerFactory factory)
         {
             if(env.IsEnvironment("Development"))
             {
                 app.UseDeveloperExceptionPage();
+                factory.AddDebug(LogLevel.Information);
+            }
+            else
+            {
+                factory.AddDebug(LogLevel.Error);
             }
             
             app.UseStaticFiles();
